@@ -2,14 +2,12 @@
 
 ## 1. Screenshot terminal chạy `python3 benchmark.py`
 
-## Benchmark
+### Benchmark
 ![Kết quả benchmark](./images/image.png)
-
 
 ---
 
 ## 2. File `benchmark_result.json`
-
 
 **Đính kèm file:** `./terraform-gcp/benchmark_result.json`
 
@@ -17,35 +15,33 @@
 
 ## 3. Screenshot GCP Billing Reports sau 1 giờ triển khai
 
-![Kết quả bill ](./images/image2.png)
+![Kết quả billing](./images/image2.png)
+
+> **Ghi chú:** Tại thời điểm chụp màn hình, Google Cloud Billing Reports vẫn chưa hiển thị chi phí phát sinh và vẫn hiện `₫0`, dù hạ tầng đã được triển khai thành công và benchmark đã chạy xong. Điều này nhiều khả năng do độ trễ cập nhật của Google Cloud Billing.
 
 ---
 
 ## 4. Mã nguồn thư mục `terraform-gcp/` đã chỉnh sửa
 
-**Yêu cầu:** nộp mã nguồn thư mục `terraform-gcp/` với các chỉnh sửa:
+**Yêu cầu:** Nộp mã nguồn thư mục `terraform-gcp/` với các chỉnh sửa cho phương án CPU fallback.
 
-#guest_accelerator {
-  # type  = var.gpu_type
-  #count = var.gpu_count
-  # }
+### Đoạn cấu hình đã chỉnh sửa
 
-  #scheduling {
-  #  on_host_maintenance = "TERMINATE"
-  # automatic_restart   = true
-  #}
-  scheduling {
-    on_host_maintenance = "MIGRATE"
-    automatic_restart   = true
-  }
+```hcl
+# guest_accelerator {
+#   type  = var.gpu_type
+#   count = var.gpu_count
+# }
 
-**Tóm tắt thay đổi:**
+# scheduling {
+#   on_host_maintenance = "TERMINATE"
+#   automatic_restart   = true
+# }
 
-* Đã comment cấu hình GPU block.
-* Đã cập nhật machine type thành `n2-standard-8`.
-
-
----
+scheduling {
+  on_host_maintenance = "MIGRATE"
+  automatic_restart   = true
+}
 
 ## 5. Báo cáo ngắn
 
