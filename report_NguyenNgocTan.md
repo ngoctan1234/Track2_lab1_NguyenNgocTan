@@ -42,6 +42,7 @@ scheduling {
   on_host_maintenance = "MIGRATE"
   automatic_restart   = true
 }
+```
 
 ## 5. Báo cáo ngắn
 
